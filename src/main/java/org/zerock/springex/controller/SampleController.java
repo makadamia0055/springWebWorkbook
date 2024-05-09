@@ -17,10 +17,11 @@ public class SampleController {
         log.info("hello.....");
     }
     @GetMapping("/ex1")
-    public void ex1(String name, int age){
+    public String ex1(String name, int age){
         log.info("ex1..........");
         log.info("name: " + name);
         log.info("age: " + age);
+        return "ex1";
     }
     @GetMapping("/ex2")
     public void ex2(@RequestParam(name= "name", defaultValue="AAA") String name,
