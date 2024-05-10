@@ -14,6 +14,8 @@
         <property name="suffix" value=".jsp"></property>
 
     </bean>
+    <context:component-scan base-package="org.zerock.springex"/>
+
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
