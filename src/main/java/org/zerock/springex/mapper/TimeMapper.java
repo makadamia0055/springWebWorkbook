@@ -1,4 +1,4 @@
-package org.zerock.springex.sample.mapper;
+package org.zerock.springex.mapper;
 
 import org.apache.ibatis.annotations.Select;
 
