@@ -49,7 +49,7 @@ public class TodoController {
     @RequestMapping("/list")
     public void list(Model model){
         log.info("todo list....");
-        model.addAttribute("dtoList", todoService.getAll());
+        //model.addAttribute("dtoList", todoService.getAll());
     }
 
     @GetMapping({"/read", "/modify"})
