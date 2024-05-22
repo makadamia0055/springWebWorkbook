@@ -48,6 +48,36 @@
     <div class="row content">
         <div class="col">
             <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Search </h5>
+                    <form action="/todo/list" method="get">
+                        <input type="hidden" name="size" value="${pageRequestDTO.size}">
+                        <div class="mb-3">
+                            <input type="checkbox" name="finished" ${pageRequestDTO.finished?"checked":""} >완료여부
+                        </div>
+                        <div class="mb-3">
+                            <input type="checkbox" name="types" value="t" ${pageRequestDTO.checkType("t")?"checked":""}>제목
+                            <input type="checkbox" name="types" value="w" ${pageRequestDTO.checkType("w")?"checked":""}>작성자
+                            <input type="text" name="keyword" class="form-control" value='<c:out value="${pageRequestDTO.keyword}"/>'>
+                        </div>
+                        <div class="input-group mb-3 deuDateDiv">
+                            <input type="date" name="from" class="form-control" value="${pageRequestDTO.from}">
+                            <input type="date" name="to" class="form-control" value="${pageRequestDTO.to}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="float-end">
+                                <button class="btn btn-primary" type="submit">Search</button>
+                                <button class="btn btn-info clearBtn" type="reset">Clear</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col">
+            <div class="card">
                 <div class="card-header">
                     Featured
                 </div>
@@ -66,7 +96,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${dtoList}" var="dto">
+                            <c:forEach items="${responseDTO.dtoList}" var="dto">
                                 <tr>
                                     <th scope="row"><c:out value="${dto.tno}"/></th>
                                     <td>
@@ -86,7 +116,7 @@
                 </div>
             </div>
         </div>
-        <h1>Content</h1>
+
     </div>
     <div class="row footer">
         <!--<h1>Footer</h1>-->
@@ -99,5 +129,32 @@
 
     </div>
 </div>
+<script>
+    document.querySelector(".clearBtn").addEventListener("click", function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location='/todo/list'
+    }, false)
+
+    document.querySelector(".pagenation").addEventListener("click", function(e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if(target.tagName !== 'A'){
+            return
+        }
+        const num = target.getAttribute("data-num")
+
+        const formObj = document.querySelector("form")
+
+        formObj.innerHTML += `<input type='hidden' name='page' value'\${num}'>`
+
+        formObj.submit()
+    }, false)
+
+</script>
 </body>
 </html>
