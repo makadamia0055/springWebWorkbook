@@ -92,7 +92,7 @@
                             self.location = `/todo/modify?tno=${dto.tno}&${pageRequestDTO.link}`
                         },false)
                         document.querySelector(".to-list").addEventListener("click", function (e){
-                            self.location = "/todo/list?${pageRequestDTO.link}"
+                            self.location = `/todo/list?${pageRequestDTO.link}`;
                         }, false)
                     </script>
                 </div>

@@ -53,8 +53,6 @@
                 </div>
                 <div class="card-body">
                     <form action="/todo/modify" method="post">
-                        <input type="hidden" name="page" value="${pageRequestDTO.page}">
-                        <input type="hidden" name="size" value="${pageRequestDTO.size}">
 
                         <div class="input-group mb-3">
                             <span class="input-group-text">TNO</span>
@@ -83,23 +81,23 @@
                             <input type="checkbox" name="finished" class="form-check-input"
                             ${dto.finished?"checked":""} >
 
+                        </div>
+
+                        <div class="my-4">
+                            <div class="float-end">
+                                <button type="button" class="btn btn-danger btn-remove">Remove</button>
+                                <button type="button" class="btn btn-primary btn-modify">Modify</button>
+                                <button type="button" class="btn btn-secondary btn-list">List</button>
+                            </div>
 
                         </div>
                     </form>
-                    <div class="my-4">
-                        <div class="float-end">
-                            <button type="button" class="btn btn-danger btn-remove">Remove</button>
-                            <button type="button" class="btn btn-primary btn-modify">Modify</button>
-                            <button type="button" class="btn btn-secondary btn-list">List</button>
-                        </div>
-
-                    </div>
                     <script>
 
                         document.querySelector(".btn-list").addEventListener("click", function (e){
                             e.preventDefault()
                             e.stopPropagation()
-                            self.location = "/tno/list?${pageRequestDTO.link}";
+                            self.location = `/todo/list?${pageRequestDTO.link}`;
                         }, false)
 
                         const formObj = document.querySelector("form")
@@ -108,7 +106,7 @@
                         document.querySelector(".btn-remove").addEventListener("click", function(e){
                             e.preventDefault()
                             e.stopPropagation()
-                            formObj.action = "/todo/remove"
+                            formObj.action = `/todo/remove?${pageRequestDTO.link}`
                             formObj.method = "post"
 
                             formObj.submit()
